@@ -44,28 +44,34 @@ function gameBoard(){
     player1.addEventListener("change",()=>{
         name1.textContent=player1.value;
     });
+
 function clean(){
-    for(let i=0; i<cellr.length;i++){
+    for (let i = 0; i < cellr.length; i++){
         cellr[i].textContent = '';
     }
-    for(let i=0; i<3;i++){
-        for(let j =0; j<3; j++){
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
             board[i][j]=0;
         }
     }
-    counter =0;
 
+    counter = 0;
 }
+
 function checkWinner(){
     let result;
     let tieBraker =[];
-    for(let i=0;i<columns; i++){
-        for(let j =0; j<rows;j++){
-            result+=board[i][j]
-        }
-        if(result =='XXX'){
+    function axisCheck(index1, index2,){
+    return {
+        loop(){
+        for(let i=0;i<columns;i++){
+            for(let j=0; j<rows;j++){
+                result+=board[eval(index1)][eval(index2)];
+            }
+             if(result =='XXX'){
             player1Counter++;
-            score.textContent++;
+            score1.textContent++;
             clean();
             return
         }if(result =="OOO"){
@@ -76,54 +82,46 @@ function checkWinner(){
         }
         console.log(result);
         result = '';
-    }
-     for(let i=0;i<columns; i++){
-        for(let j =0; j<rows;j++){
-            result+=board[j][i]
         }
-        if(result =='XXX'){
-            player1Counter++;
-              score2.textContent++;
-            clean();
-            return
-        }if(result =="OOO"){
-            player2Counter++;
-            score1.textContent++;
-            clean();
-            return
+    }
+    }
+ }
+    function diagonalCheckX(number1,number2,number3){
+        return {
+            loop() {
+                if(board[number1][0]+board[number2][1]+board[number3][2] == 'XXX') {
+                    player2Counter++
+                    score2.textContent++;
+                    
+                    clean();
+                    return;
+                }
+            }
         }
-        result = '';
     }
-    if(board[0][0]+board[0][1]+board[0][2] == 'OOO'){
-         player1Counter++
-          score1.textContent++;
-        clean();
-        return
+
+    function diagonalCheckO(number1,number2,number3){
+        return function loop() {
+            if(board[number1][0]+board[number2][1]+board[number3][2] == 'OOO') {
+                player1Counter++
+                score1.textContent++;
+                
+                clean();
+                return;
+            }
+        }
     }
-    if(board[0][0]+board[1][1]+board[2][2] == 'XXX'){
-        player2Counter++
-          score2.textContent++;
-        clean();
-        return
-    }
-    if(board[0][0]+board[1][1]+board[2][2] == 'OOO'){
-        player1Counter++
-        score1.textContent++;
-        clean();
-        return
-    }
-    if(board[2][0]+board[1][1]+board[0][2] == 'XXX'){
-        player1Counter++
-          score2.textContent++;
-        clean();
-        return
-    }
-    if(board[2][0]+board[1][1]+board[0][2] == 'OOO'){
-        player2Counter++
-        score1.textContent++;
-        clean();
-        return
-    }
+
+    const verticalCheck = axisCheck('i','j');
+    const horizontalCheck = axisCheck('j','i');
+    verticalCheck.loop();
+    horizontalCheck.loop();
+
+    diagonalCheckO(0,0,0)();
+    diagonalCheckX(0,1,2).loop();
+    diagonalCheckO(0,1,2)();
+    diagonalCheckX(2,1,0).loop();
+    diagonalCheckO(2,1,0)();
    
      for(let i=0;i<columns; i++){
         for(let j =0; j<rows;j++){
