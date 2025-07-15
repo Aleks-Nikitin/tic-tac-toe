@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="reset.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <h1>Tic tac toe</h1>
+            <output></output>
+        </div>
+        <div class="mid">
+            <form action="post" method="get">
+                  <label for="player1">Player 1 name:</label>
+                <input type="text" id="player1">
+              
+                <label for="player2"> Player 2 name:</label>
+                <input type="text" name="" id="player2">
+                <button type="button">Confirm</button>
+                <button id="reset" type="button">Reset</button>
+            </form>
+            <div class="scores">
+                <div class="player1Section">
+                    <div class="name1"></div>
+                    <div class="score1">0</div>
+                </div>
+                 <div class="player2Section">
+                    <div class="name2"></div>
+                    <div class="score2">0</div>
+                </div>
+                
+                
+            </div>
+        </div>
+        <div class="content">
+            <div class="cell" id="top-left">
+               
+            </div>
+             <div class="cell" id="top-center">
+               
+            </div>
+             <div class="cell" id="top-right">
+               
+            </div>
+             <div class="cell" id="middle-left">
+               
+            </div>
+             <div class="cell" id="middle-center">
+             
+            </div>
+             <div class="cell" id="middle-right">
+          
+            </div>
+               <div class="cell" id="bottom-left">
+                
+            </div>
+             <div class="cell" id="bottom-center">
+               
+            </div>
+             <div class="cell" id="bottom-right">
+                
+            </div>
+        </div>
+    </div>
+    <script src="script.js" defer></script>
+</body>
+</html>
