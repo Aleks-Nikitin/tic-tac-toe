@@ -51,6 +51,7 @@ function clean(){
 }
 function checkWinner(){
     let result;
+    let tieBraker =[];
     for(let i=0;i<columns; i++){
         for(let j =0; j<rows;j++){
             result+=board[i][j]
@@ -101,14 +102,27 @@ function checkWinner(){
         clean();
         return
     }
-    
+   
+     for(let i=0;i<columns; i++){
+        for(let j =0; j<rows;j++){
+            tieBraker.push(board[j][i])
+        } }
+         if(!(tieBraker.includes(0))){
+        clean();
+        tieBraker=[];
+    }
+  
 }
 play('bottom','right');
 play('bottom','center');
 play('middle','center');
 play('bottom','left');
-play('top','left');
-play('top','right');
+play('middle','left');
+play('middle','right');
+play('top', 'center');
+play('top', 'left');
+play('top', 'right');
+
 console.log(board.map(row => row.join(', ')).join('\n'))
 }
 
