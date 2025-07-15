@@ -1,5 +1,7 @@
 function gameBoard(){
     let counter =0;
+    let player1Counter =0;
+    let player2Counter =0;
     const board =[];
     const rows = 3;
     const columns =3;
@@ -30,6 +32,9 @@ function gameBoard(){
     }else{
        
         isEven(counter) ? board[positionVert][positionHoriz] ='X': board[positionVert][positionHoriz] = 'O';
+        checkWinner();
+        console.log(`${player1Counter}-1st player`);
+        console.log(`${player2Counter}-2nd player`);
          ++counter
     }
    
@@ -37,9 +42,73 @@ function gameBoard(){
 function isEven(n){
    return n%2 ==0;
 }
-
+function clean(){
+    for(let i=0; i<3;i++){
+        for(let j =0; j<3; j++){
+            board[i][j]=0;
+        }
+    }
+}
+function checkWinner(){
+    let result;
+    for(let i=0;i<columns; i++){
+        for(let j =0; j<rows;j++){
+            result+=board[i][j]
+        }
+        if(result =='XXX'){
+            player1Counter++;
+            clean();
+            return
+        }else if(result =="OOO"){
+            player2Counter++;
+            clean();
+            return
+        }
+        result = '';
+    }
+     for(let i=0;i<columns; i++){
+        for(let j =0; j<rows;j++){
+            result+=board[j][i]
+        }
+        if(result =='XXX'){
+            player1Counter++;
+            clean();
+            return
+        }else if(result =="OOO"){
+            player2Counter++;
+            clean();
+            return
+        }
+        result = '';
+    }
+    if(board[0][0]+board[1][1]+board[2][2] == 'XXX'){
+        player1Counter++
+        clean();
+        return
+    }
+    if(board[0][0]+board[1][1]+board[2][2] == 'OOO'){
+        player2Counter++
+        clean();
+        return
+    }
+    if(board[2][0]+board[1][1]+board[0][2] == 'XXX'){
+        player1Counter++
+        clean();
+        return
+    }
+    if(board[2][0]+board[1][1]+board[0][2] == 'OOO'){
+        player2Counter++
+        clean();
+        return
+    }
+    
+}
 play('bottom','right');
 play('bottom','center');
+play('middle','center');
+play('bottom','left');
+play('top','left');
+play('top','right');
 console.log(board.map(row => row.join(', ')).join('\n'))
 }
 
